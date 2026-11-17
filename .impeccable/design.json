@@ -1,0 +1,447 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-17T12:49:30.890Z",
+  "title": "Design System: Vanguard AV web app",
+  "extensions": {
+    "colorMeta": {
+      "canvas": {
+        "role": "neutral",
+        "displayName": "Workspace canvas",
+        "tonalRamp": [
+          "oklch(15% 0.005 145.3)",
+          "oklch(26% 0.005 145.3)",
+          "oklch(37% 0.005 145.3)",
+          "oklch(49% 0.005 145.3)",
+          "oklch(60% 0.005 145.3)",
+          "oklch(72% 0.005 145.3)",
+          "oklch(84% 0.005 145.3)",
+          "oklch(95% 0.005 145.3)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Panel surface",
+        "tonalRamp": [
+          "oklch(15% 0.008 145.3)",
+          "oklch(26% 0.008 145.3)",
+          "oklch(37% 0.008 145.3)",
+          "oklch(49% 0.008 145.3)",
+          "oklch(60% 0.008 145.3)",
+          "oklch(72% 0.008 145.3)",
+          "oklch(84% 0.008 145.3)",
+          "oklch(95% 0.008 145.3)"
+        ]
+      },
+      "surface-raised": {
+        "role": "neutral",
+        "displayName": "Floating surface",
+        "tonalRamp": [
+          "oklch(15% 0.010 145.2)",
+          "oklch(26% 0.010 145.2)",
+          "oklch(37% 0.010 145.2)",
+          "oklch(49% 0.010 145.2)",
+          "oklch(60% 0.010 145.2)",
+          "oklch(72% 0.010 145.2)",
+          "oklch(84% 0.010 145.2)",
+          "oklch(95% 0.010 145.2)"
+        ]
+      },
+      "surface-hover": {
+        "role": "neutral",
+        "displayName": "Neutral hover",
+        "tonalRamp": [
+          "oklch(15% 0.019 145.0)",
+          "oklch(26% 0.019 145.0)",
+          "oklch(37% 0.019 145.0)",
+          "oklch(49% 0.019 145.0)",
+          "oklch(60% 0.019 145.0)",
+          "oklch(72% 0.019 145.0)",
+          "oklch(84% 0.019 145.0)",
+          "oklch(95% 0.019 145.0)"
+        ]
+      },
+      "surface-selected": {
+        "role": "neutral",
+        "displayName": "Current selection",
+        "tonalRamp": [
+          "oklch(15% 0.045 145.5)",
+          "oklch(26% 0.045 145.5)",
+          "oklch(37% 0.045 145.5)",
+          "oklch(49% 0.045 145.5)",
+          "oklch(60% 0.045 145.5)",
+          "oklch(72% 0.045 145.5)",
+          "oklch(84% 0.045 145.5)",
+          "oklch(95% 0.045 145.5)"
+        ]
+      },
+      "border-subtle": {
+        "role": "neutral",
+        "displayName": "Quiet divider",
+        "tonalRamp": [
+          "oklch(15% 0.027 144.9)",
+          "oklch(26% 0.027 144.9)",
+          "oklch(37% 0.027 144.9)",
+          "oklch(49% 0.027 144.9)",
+          "oklch(60% 0.027 144.9)",
+          "oklch(72% 0.027 144.9)",
+          "oklch(84% 0.027 144.9)",
+          "oklch(95% 0.027 144.9)"
+        ]
+      },
+      "border-control": {
+        "role": "neutral",
+        "displayName": "Control stroke",
+        "tonalRamp": [
+          "oklch(15% 0.031 145.2)",
+          "oklch(26% 0.031 145.2)",
+          "oklch(37% 0.031 145.2)",
+          "oklch(49% 0.031 145.2)",
+          "oklch(60% 0.031 145.2)",
+          "oklch(72% 0.031 145.2)",
+          "oklch(84% 0.031 145.2)",
+          "oklch(95% 0.031 145.2)"
+        ]
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Main text",
+        "tonalRamp": [
+          "oklch(15% 0.018 140.0)",
+          "oklch(26% 0.018 140.0)",
+          "oklch(37% 0.018 140.0)",
+          "oklch(49% 0.018 140.0)",
+          "oklch(60% 0.018 140.0)",
+          "oklch(72% 0.018 140.0)",
+          "oklch(84% 0.018 140.0)",
+          "oklch(95% 0.018 140.0)"
+        ]
+      },
+      "text-muted": {
+        "role": "neutral",
+        "displayName": "Supporting text",
+        "tonalRamp": [
+          "oklch(15% 0.026 143.4)",
+          "oklch(26% 0.026 143.4)",
+          "oklch(37% 0.026 143.4)",
+          "oklch(49% 0.026 143.4)",
+          "oklch(60% 0.026 143.4)",
+          "oklch(72% 0.026 143.4)",
+          "oklch(84% 0.026 143.4)",
+          "oklch(95% 0.026 143.4)"
+        ]
+      },
+      "primary": {
+        "role": "primary",
+        "displayName": "Vanguard green",
+        "tonalRamp": [
+          "oklch(15% 0.157 140.7)",
+          "oklch(26% 0.157 140.7)",
+          "oklch(37% 0.157 140.7)",
+          "oklch(49% 0.157 140.7)",
+          "oklch(60% 0.157 140.7)",
+          "oklch(72% 0.157 140.7)",
+          "oklch(84% 0.157 140.7)",
+          "oklch(95% 0.157 140.7)"
+        ]
+      },
+      "primary-hover": {
+        "role": "primary",
+        "displayName": "Vanguard green hover",
+        "tonalRamp": [
+          "oklch(15% 0.166 140.5)",
+          "oklch(26% 0.166 140.5)",
+          "oklch(37% 0.166 140.5)",
+          "oklch(49% 0.166 140.5)",
+          "oklch(60% 0.166 140.5)",
+          "oklch(72% 0.166 140.5)",
+          "oklch(84% 0.166 140.5)",
+          "oklch(95% 0.166 140.5)"
+        ]
+      },
+      "primary-pressed": {
+        "role": "primary",
+        "displayName": "Vanguard green pressed",
+        "tonalRamp": [
+          "oklch(15% 0.134 140.7)",
+          "oklch(26% 0.134 140.7)",
+          "oklch(37% 0.134 140.7)",
+          "oklch(49% 0.134 140.7)",
+          "oklch(60% 0.134 140.7)",
+          "oklch(72% 0.134 140.7)",
+          "oklch(84% 0.134 140.7)",
+          "oklch(95% 0.134 140.7)"
+        ]
+      },
+      "on-primary": {
+        "role": "primary",
+        "displayName": "Content on primary",
+        "tonalRamp": [
+          "oklch(15% 0.000 0)",
+          "oklch(26% 0.000 0)",
+          "oklch(37% 0.000 0)",
+          "oklch(49% 0.000 0)",
+          "oklch(60% 0.000 0)",
+          "oklch(72% 0.000 0)",
+          "oklch(84% 0.000 0)",
+          "oklch(95% 0.000 0)"
+        ]
+      },
+      "accent-text": {
+        "role": "primary",
+        "displayName": "Link and focus green",
+        "tonalRamp": [
+          "oklch(15% 0.154 139.5)",
+          "oklch(26% 0.154 139.5)",
+          "oklch(37% 0.154 139.5)",
+          "oklch(49% 0.154 139.5)",
+          "oklch(60% 0.154 139.5)",
+          "oklch(72% 0.154 139.5)",
+          "oklch(84% 0.154 139.5)",
+          "oklch(95% 0.154 139.5)"
+        ]
+      },
+      "positive": {
+        "role": "secondary",
+        "displayName": "Positive outcome",
+        "tonalRamp": [
+          "oklch(15% 0.111 166.2)",
+          "oklch(26% 0.111 166.2)",
+          "oklch(37% 0.111 166.2)",
+          "oklch(49% 0.111 166.2)",
+          "oklch(60% 0.111 166.2)",
+          "oklch(72% 0.111 166.2)",
+          "oklch(84% 0.111 166.2)",
+          "oklch(95% 0.111 166.2)"
+        ]
+      },
+      "positive-bg": {
+        "role": "secondary",
+        "displayName": "Positive background",
+        "tonalRamp": [
+          "oklch(15% 0.039 168.1)",
+          "oklch(26% 0.039 168.1)",
+          "oklch(37% 0.039 168.1)",
+          "oklch(49% 0.039 168.1)",
+          "oklch(60% 0.039 168.1)",
+          "oklch(72% 0.039 168.1)",
+          "oklch(84% 0.039 168.1)",
+          "oklch(95% 0.039 168.1)"
+        ]
+      },
+      "caution": {
+        "role": "secondary",
+        "displayName": "Review",
+        "tonalRamp": [
+          "oklch(15% 0.120 83.9)",
+          "oklch(26% 0.120 83.9)",
+          "oklch(37% 0.120 83.9)",
+          "oklch(49% 0.120 83.9)",
+          "oklch(60% 0.120 83.9)",
+          "oklch(72% 0.120 83.9)",
+          "oklch(84% 0.120 83.9)",
+          "oklch(95% 0.120 83.9)"
+        ]
+      },
+      "caution-bg": {
+        "role": "secondary",
+        "displayName": "Review background",
+        "tonalRamp": [
+          "oklch(15% 0.041 80.4)",
+          "oklch(26% 0.041 80.4)",
+          "oklch(37% 0.041 80.4)",
+          "oklch(49% 0.041 80.4)",
+          "oklch(60% 0.041 80.4)",
+          "oklch(72% 0.041 80.4)",
+          "oklch(84% 0.041 80.4)",
+          "oklch(95% 0.041 80.4)"
+        ]
+      },
+      "danger": {
+        "role": "secondary",
+        "displayName": "Threat or error",
+        "tonalRamp": [
+          "oklch(15% 0.117 20.0)",
+          "oklch(26% 0.117 20.0)",
+          "oklch(37% 0.117 20.0)",
+          "oklch(49% 0.117 20.0)",
+          "oklch(60% 0.117 20.0)",
+          "oklch(72% 0.117 20.0)",
+          "oklch(84% 0.117 20.0)",
+          "oklch(95% 0.117 20.0)"
+        ]
+      },
+      "danger-bg": {
+        "role": "secondary",
+        "displayName": "Threat or error background",
+        "tonalRamp": [
+          "oklch(15% 0.042 13.0)",
+          "oklch(26% 0.042 13.0)",
+          "oklch(37% 0.042 13.0)",
+          "oklch(49% 0.042 13.0)",
+          "oklch(60% 0.042 13.0)",
+          "oklch(72% 0.042 13.0)",
+          "oklch(84% 0.042 13.0)",
+          "oklch(95% 0.042 13.0)"
+        ]
+      },
+      "info": {
+        "role": "secondary",
+        "displayName": "In progress",
+        "tonalRamp": [
+          "oklch(15% 0.096 258.3)",
+          "oklch(26% 0.096 258.3)",
+          "oklch(37% 0.096 258.3)",
+          "oklch(49% 0.096 258.3)",
+          "oklch(60% 0.096 258.3)",
+          "oklch(72% 0.096 258.3)",
+          "oklch(84% 0.096 258.3)",
+          "oklch(95% 0.096 258.3)"
+        ]
+      },
+      "info-bg": {
+        "role": "secondary",
+        "displayName": "In progress background",
+        "tonalRamp": [
+          "oklch(15% 0.052 259.7)",
+          "oklch(26% 0.052 259.7)",
+          "oklch(37% 0.052 259.7)",
+          "oklch(49% 0.052 259.7)",
+          "oklch(60% 0.052 259.7)",
+          "oklch(72% 0.052 259.7)",
+          "oklch(84% 0.052 259.7)",
+          "oklch(95% 0.052 259.7)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "page-title": {
+        "displayName": "Page title",
+        "purpose": "Primary heading in compact layouts."
+      },
+      "page-title-wide": {
+        "displayName": "Wide page title",
+        "purpose": "Primary heading at 640px and above."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Explanations, result text, and input values."
+      },
+      "code": {
+        "displayName": "Technical text",
+        "purpose": "Exact values and excerpts."
+      }
+    },
+    "shadows": [
+      {
+        "name": "popover",
+        "value": "0 8px 24px rgb(0 0 0 / 35%)",
+        "purpose": "Floating menus and popovers."
+      },
+      {
+        "name": "dialog",
+        "value": "0 16px 48px rgb(0 0 0 / 50%)",
+        "purpose": "Modal dialogs."
+      }
+    ],
+    "motion": [
+      {
+        "name": "state-change",
+        "value": "120ms ease-out",
+        "purpose": "Hover and press color feedback."
+      },
+      {
+        "name": "overlay-enter",
+        "value": "180ms ease-out",
+        "purpose": "Opening menus and dialogs."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "roomy",
+        "value": "640px"
+      },
+      {
+        "name": "rail",
+        "value": "1024px"
+      },
+      {
+        "name": "wide",
+        "value": "1280px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Start scan",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Start the principal task.",
+      "html": "<button type=\"button\" class=\"ds-button\">Start scan</button>",
+      "css": ".ds-button { background: #1c7304; color: #ffffff; min-height: 2.75rem; padding: 0.625rem 1rem; border-radius: 12px; font: 600 0.875rem/1.25rem Outfit, ui-sans-serif, system-ui, sans-serif; border: 0; cursor: pointer; transition: background-color 120ms ease-out; } .ds-button:hover:not(:disabled) { background: #237f08; } .ds-button:active:not(:disabled) { background: #175e05; } .ds-button:disabled { background: #161a16; color: #a1afa0; cursor: default; } .ds-button:focus-visible { outline: 2px solid #8cdb78; outline-offset: 2px; } @media (prefers-reduced-motion: reduce) { .ds-button { transition: none; } }"
+    },
+    {
+      "name": "View details",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Offer a supporting action.",
+      "html": "<button type=\"button\" class=\"ds-button\">View details</button>",
+      "css": ".ds-button { background: #111411; color: #e2ebe0; min-height: 2.75rem; padding: 0.625rem 1rem; border-radius: 12px; font: 600 0.875rem/1.25rem Outfit, ui-sans-serif, system-ui, sans-serif; border: 1px solid #708070; cursor: pointer; transition: background-color 120ms ease-out; } .ds-button:hover:not(:disabled) { background: #202820; } .ds-button:active:not(:disabled) { background: #203521; } .ds-button:disabled { background: #161a16; color: #a1afa0; cursor: default; } .ds-button:focus-visible { outline: 2px solid #8cdb78; outline-offset: 2px; } @media (prefers-reduced-motion: reduce) { .ds-button { transition: none; } }"
+    },
+    {
+      "name": "Text field",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "Show the label, field, and help together.",
+      "html": "<label class=\"ds-label\">URL <input class=\"ds-field\" type=\"text\" placeholder=\"https://example.com\" aria-describedby=\"ds-url-help\"></label><p id=\"ds-url-help\" class=\"ds-help\">Enter the address you want to check.</p>",
+      "css": ".ds-label { display: grid; gap: 0.5rem; color: #e2ebe0; font: 600 0.875rem/1.25rem Outfit, ui-sans-serif, system-ui, sans-serif; } .ds-field { box-sizing: border-box; background: #0a0c0a; color: #e2ebe0; min-height: 2.75rem; padding: 0.5rem 0.75rem; border-radius: 12px; font: 400 1rem/1.5rem Outfit, ui-sans-serif, system-ui, sans-serif; min-width: 0; border: 1px solid #708070; } .ds-field::placeholder { color: #a1afa0; opacity: 1; } .ds-field:focus { border-color: #8cdb78; } .ds-field[aria-invalid=\"true\"] { border-color: #ff9d9d; } .ds-field:focus-visible { outline: 2px solid #8cdb78; outline-offset: 2px; } .ds-help { margin: 0.5rem 0 0; color: #a1afa0; font: 400 0.875rem/1.25rem Outfit, ui-sans-serif, system-ui, sans-serif; }"
+    },
+    {
+      "name": "Review badge",
+      "kind": "chip",
+      "refersTo": "badge-review",
+      "description": "A visible label for the review verdict.",
+      "html": "<span class=\"ds-badge\">Needs review</span>",
+      "css": ".ds-badge { display: inline-block; background: #382b14; color: #f2c66b; border-radius: 999px; padding: 0.25rem 0.5rem; font: 500 0.75rem/1rem Outfit, ui-sans-serif, system-ui, sans-serif; }"
+    },
+    {
+      "name": "Finding panel",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "Present the finding, its explanation, and the next step in that order.",
+      "html": "<article class=\"ds-finding\"><h3 class=\"ds-heading\">Coverage is incomplete</h3><p class=\"ds-description\">One check could not be completed.</p><p class=\"ds-next\">Review the available checks before deciding what to do.</p></article>",
+      "css": ".ds-finding { background: #111411; color: #e2ebe0; border: 1px solid #243024; border-radius: 12px; padding: 1rem; } .ds-heading { margin: 0; font: 600 1.125rem/1.5rem Outfit, ui-sans-serif, system-ui, sans-serif; } .ds-description, .ds-next { margin: 0.5rem 0 0; color: #a1afa0; font: 400 0.875rem/1.25rem Outfit, ui-sans-serif, system-ui, sans-serif; } @media (min-width: 640px) { .ds-finding { padding: 1.5rem; } }"
+    },
+    {
+      "name": "Current navigation item",
+      "kind": "nav",
+      "refersTo": "navigation-current",
+      "description": "Mark the current page with a shape cue and a distinct surface.",
+      "html": "<nav aria-label=\"Workspace\"><a class=\"ds-nav-link\" aria-current=\"page\" href=\"#workspace\">Overview</a></nav>",
+      "css": ".ds-nav-link { background: #203521; color: #8cdb78; min-height: 2.75rem; padding: 0.5rem 0.75rem; border-radius: 8px; font: 600 0.875rem/1.25rem Outfit, ui-sans-serif, system-ui, sans-serif; display: flex; align-items: center; box-sizing: border-box; border-inline-start: 3px solid #8cdb78; text-decoration: none; } .ds-nav-link:hover { text-decoration: underline; } .ds-nav-link:focus-visible { outline: 2px solid #8cdb78; outline-offset: 2px; }"
+    }
+  ],
+  "narrative": {
+    "overview": "The workspace inherits the Vanguard helmet and wordmark, green-black surfaces, and Outfit typography. It uses quiet panels and a clear reading order so people can find the scan action, understand a verdict, and see what to do next.",
+    "keyCharacteristics": [
+      "Solid surfaces and visible control boundaries",
+      "Outfit for the UI and JetBrains Mono for evidence",
+      "Distinct labels for verdict, coverage, and progress"
+    ],
+    "rules": [
+      {
+        "name": "The action and verdict rule",
+        "body": "Brand green signals something the user can do. A scan outcome has its own text and tone, even when the outcome is favorable.",
+        "section": "colors"
+      }
+    ],
+    "dos": [
+      "Do use the shared palette, radius, and spacing roles before adding a new token. If implementation proves a new role is needed, update the app tokens, this document, and the preview together.",
+      "Do pair scan outcomes with a visible label, scope of coverage, and a next step when appropriate.",
+      "Do check default, hover, focus, pressed, disabled, loading, empty, error, and partial-result states for any component that supports them. Check keyboard, touch, zoom, and reduced motion on the first real workflow."
+    ],
+    "donts": [
+      "Don't use the public site's decorative headlines, glossy effects, or moving card tracks in the workspace's routine controls and result views.",
+      "Don't use color alone for selection, errors, or verdicts, or show a favorable verdict merely because processing completed."
+    ]
+  }
+}
