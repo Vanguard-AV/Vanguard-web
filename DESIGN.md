@@ -2,19 +2,22 @@
 name: Vanguard AV web app
 description: Proposed dark workspace design system, grounded in the Vanguard AV public website.
 colors:
+  # Core brand palette from the public homepage.
+  primary: "#1c7304"
+  brand-highlight: "#2ea309"
   canvas: "#0a0c0a"
   surface: "#111411"
   surface-raised: "#161a16"
+  text: "#e2ebe0"
+  on-primary: "#ffffff"
+  # Supporting workspace colors.
   surface-hover: "#202820"
   surface-selected: "#203521"
   border-subtle: "#243024"
   border-control: "#708070"
-  text: "#e2ebe0"
   text-muted: "#a1afa0"
-  primary: "#1c7304"
   primary-hover: "#237f08"
   primary-pressed: "#175e05"
-  on-primary: "#ffffff"
   accent-text: "#8cdb78"
   positive: "#72d6af"
   positive-bg: "#153127"
@@ -157,14 +160,26 @@ The [public marketing site](https://www.vanguard-av.net/) is a separate implemen
 
 ## Colors
 
+### Core brand palette
+
+Use the public homepage hero as the visual reference. Carry its green action fill, brighter green headline highlight, dark green-black surfaces, and light text into Vanguard brand work. The headline highlight uses the middle color of the site's animated green accent. The honeycomb and glow use layered variations of the palette. [Homepage](https://www.vanguard-av.net/) · [Deployed stylesheet](https://www.vanguard-av.net/assets/root-W6D8ZvvC.css) · [Hero styles](https://www.vanguard-av.net/assets/home-CNdp6dFv.js)
+
+| Token | Brand role |
+| --- | --- |
+| `primary` | Vanguard green for the principal action, as seen on Get Vanguard. |
+| `brand-highlight` | Brighter green for display highlights and brand artwork, as seen on “Frontier.” |
+| `canvas` | Near-black green base. |
+| `surface` / `surface-raised` | Dark green surface steps for panels and floating surfaces. |
+| `text` / `on-primary` | Green-tinted off-white for main text, and pure white for primary button labels and hero display text. |
+
+### Workspace supporting colors
+
 | Token | Use |
 | --- | --- |
-| `canvas` | Workspace background and inset field background. |
-| `surface` / `surface-raised` | Navigation and standard panels / popovers and dialogs. |
 | `surface-hover` / `surface-selected` | Hover on neutral interactive surfaces / persistent current or selected state. Also show selection through text, an icon, or an indicator. |
 | `border-subtle` / `border-control` | Decorative separators and passive panel outlines / visible boundaries for inputs, outlined actions, and toggles. |
-| `text` / `text-muted` | Main text / helper text, secondary labels, metadata, and placeholders. A placeholder never replaces a label. |
-| `primary` / `primary-hover` / `primary-pressed` / `on-primary` | Brand action fill and its states, with white content. |
+| `text-muted` | Helper text, secondary labels, metadata, and placeholders. Give each input a visible label. |
+| `primary-hover` / `primary-pressed` | Workspace interaction shades for the brand action fill. Both use `on-primary` for their labels. |
 | `accent-text` | Inline links, focus rings, and selection indicators on dark surfaces. Underline inline links within prose. |
 
 Use status tones only with a visible label and, where helpful, a distinct icon. Keep **verdict**, **scan progress**, and **coverage** separate. A completed scan can return a risky verdict or partial coverage.
@@ -177,7 +192,7 @@ Use status tones only with a visible label and, where helpful, a distinct icon. 
 | Caution | `caution` on `caution-bg` | “Needs review” or a separately labelled partial-coverage notice |
 | Danger | `danger` on `danger-bg` | “Threat detected” or a separately labelled execution or validation error |
 
-**The action and verdict rule.** Brand green signals something the user can do. A scan outcome has its own text and tone, even when the outcome is favorable.
+**The action and verdict rule.** The primary green fill identifies the main action. A scan outcome has its own text and tone, even when the outcome is favorable.
 
 The default palette is dark. A future light theme needs its own complete set of surfaces, foregrounds, and state pairs; the public site's light overrides are reference material. Meet [WCAG 2.2 AA](https://www.w3.org/TR/WCAG22/) contrast: at least 4.5:1 for normal text, 3:1 for large text, and 3:1 for visual information required to identify controls and states against adjacent colors. Recheck final rendered states and overlays when building screens.
 

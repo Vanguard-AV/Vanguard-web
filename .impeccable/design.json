@@ -1,9 +1,37 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-17T12:49:30.890Z",
+  "generatedAt": "2026-11-17T12:55:49.720Z",
   "title": "Design System: Vanguard AV web app",
   "extensions": {
     "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Vanguard green",
+        "tonalRamp": [
+          "oklch(15% 0.157 140.7)",
+          "oklch(26% 0.157 140.7)",
+          "oklch(37% 0.157 140.7)",
+          "oklch(49% 0.157 140.7)",
+          "oklch(60% 0.157 140.7)",
+          "oklch(72% 0.157 140.7)",
+          "oklch(84% 0.157 140.7)",
+          "oklch(95% 0.157 140.7)"
+        ]
+      },
+      "brand-highlight": {
+        "role": "primary",
+        "displayName": "Vanguard highlight green",
+        "tonalRamp": [
+          "oklch(15% 0.201 140.5)",
+          "oklch(26% 0.201 140.5)",
+          "oklch(37% 0.201 140.5)",
+          "oklch(49% 0.201 140.5)",
+          "oklch(60% 0.201 140.5)",
+          "oklch(72% 0.201 140.5)",
+          "oklch(84% 0.201 140.5)",
+          "oklch(95% 0.201 140.5)"
+        ]
+      },
       "canvas": {
         "role": "neutral",
         "displayName": "Workspace canvas",
@@ -44,6 +72,34 @@
           "oklch(72% 0.010 145.2)",
           "oklch(84% 0.010 145.2)",
           "oklch(95% 0.010 145.2)"
+        ]
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Main text",
+        "tonalRamp": [
+          "oklch(15% 0.018 140.0)",
+          "oklch(26% 0.018 140.0)",
+          "oklch(37% 0.018 140.0)",
+          "oklch(49% 0.018 140.0)",
+          "oklch(60% 0.018 140.0)",
+          "oklch(72% 0.018 140.0)",
+          "oklch(84% 0.018 140.0)",
+          "oklch(95% 0.018 140.0)"
+        ]
+      },
+      "on-primary": {
+        "role": "primary",
+        "displayName": "Content on primary",
+        "tonalRamp": [
+          "oklch(15% 0.000 0)",
+          "oklch(26% 0.000 0)",
+          "oklch(37% 0.000 0)",
+          "oklch(49% 0.000 0)",
+          "oklch(60% 0.000 0)",
+          "oklch(72% 0.000 0)",
+          "oklch(84% 0.000 0)",
+          "oklch(95% 0.000 0)"
         ]
       },
       "surface-hover": {
@@ -102,20 +158,6 @@
           "oklch(95% 0.031 145.2)"
         ]
       },
-      "text": {
-        "role": "neutral",
-        "displayName": "Main text",
-        "tonalRamp": [
-          "oklch(15% 0.018 140.0)",
-          "oklch(26% 0.018 140.0)",
-          "oklch(37% 0.018 140.0)",
-          "oklch(49% 0.018 140.0)",
-          "oklch(60% 0.018 140.0)",
-          "oklch(72% 0.018 140.0)",
-          "oklch(84% 0.018 140.0)",
-          "oklch(95% 0.018 140.0)"
-        ]
-      },
       "text-muted": {
         "role": "neutral",
         "displayName": "Supporting text",
@@ -128,20 +170,6 @@
           "oklch(72% 0.026 143.4)",
           "oklch(84% 0.026 143.4)",
           "oklch(95% 0.026 143.4)"
-        ]
-      },
-      "primary": {
-        "role": "primary",
-        "displayName": "Vanguard green",
-        "tonalRamp": [
-          "oklch(15% 0.157 140.7)",
-          "oklch(26% 0.157 140.7)",
-          "oklch(37% 0.157 140.7)",
-          "oklch(49% 0.157 140.7)",
-          "oklch(60% 0.157 140.7)",
-          "oklch(72% 0.157 140.7)",
-          "oklch(84% 0.157 140.7)",
-          "oklch(95% 0.157 140.7)"
         ]
       },
       "primary-hover": {
@@ -170,20 +198,6 @@
           "oklch(72% 0.134 140.7)",
           "oklch(84% 0.134 140.7)",
           "oklch(95% 0.134 140.7)"
-        ]
-      },
-      "on-primary": {
-        "role": "primary",
-        "displayName": "Content on primary",
-        "tonalRamp": [
-          "oklch(15% 0.000 0)",
-          "oklch(26% 0.000 0)",
-          "oklch(37% 0.000 0)",
-          "oklch(49% 0.000 0)",
-          "oklch(60% 0.000 0)",
-          "oklch(72% 0.000 0)",
-          "oklch(84% 0.000 0)",
-          "oklch(95% 0.000 0)"
         ]
       },
       "accent-text": {
@@ -423,6 +437,7 @@
   "narrative": {
     "overview": "The workspace inherits the Vanguard helmet and wordmark, green-black surfaces, and Outfit typography. It uses quiet panels and a clear reading order so people can find the scan action, understand a verdict, and see what to do next.",
     "keyCharacteristics": [
+      "Vanguard green actions and brighter brand highlights on green-black surfaces",
       "Solid surfaces and visible control boundaries",
       "Outfit for the UI and JetBrains Mono for evidence",
       "Distinct labels for verdict, coverage, and progress"
@@ -430,7 +445,7 @@
     "rules": [
       {
         "name": "The action and verdict rule",
-        "body": "Brand green signals something the user can do. A scan outcome has its own text and tone, even when the outcome is favorable.",
+        "body": "The primary green fill identifies the main action. A scan outcome has its own text and tone, even when the outcome is favorable.",
         "section": "colors"
       }
     ],
