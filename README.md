@@ -1,6 +1,10 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Vanguard AV
 
-## Getting Started
+Start with the [web app handoff](docs/web-app/README.md) for requirements, scanner interfaces, and the build sequence. [PRODUCT.md](PRODUCT.md) contains the product brief for Impeccable. The [production website reference](docs/website/README.md) covers the deployed marketing site.
+
+## Local development
+
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 First, run the development server:
 

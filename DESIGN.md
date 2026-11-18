@@ -5,7 +5,7 @@ colors:
   # Core brand palette from the public homepage.
   primary: "#1c7304"
   brand-highlight: "#2ea309"
-  canvas: "#0a0c0a"
+  canvas: "#1a1a1a"
   surface: "#111411"
   surface-raised: "#161a16"
   text: "#e2ebe0"
@@ -168,7 +168,7 @@ Use the public homepage hero as the visual reference. Carry its green action fil
 | --- | --- |
 | `primary` | Vanguard green for the principal action, as seen on Get Vanguard. |
 | `brand-highlight` | Brighter green for display highlights and brand artwork, as seen on “Frontier.” |
-| `canvas` | Near-black green base. |
+| `canvas` | Charcoal base. |
 | `surface` / `surface-raised` | Dark green surface steps for panels and floating surfaces. |
 | `text` / `on-primary` | Green-tinted off-white for main text, and pure white for primary button labels and hero display text. |
 
