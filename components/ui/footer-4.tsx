@@ -40,8 +40,8 @@ export default function Footer({ theme = "dark" }: { theme?: "light" | "dark" })
   const emailId = useId();
 
   return (
-    <footer data-theme={theme} className="footer-4 site-container bg-footer-background pt-8 text-footer-foreground sm:pt-20">
-      <div className="space-y-10 sm:space-y-16">
+    <footer data-theme={theme} className="footer-4 bg-footer-background pt-8 text-footer-foreground sm:pt-20">
+      <div className="site-container space-y-10 sm:space-y-16">
         <div className="max-w-xs space-y-3">
           <Link href="/#home" className="block w-fit rounded-sm">
             <Image
