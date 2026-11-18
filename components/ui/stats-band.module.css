@@ -1,0 +1,96 @@
+@media (prefers-reduced-motion: no-preference) {
+  .chart[data-animate] {
+    --chart-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .chart[data-animate][data-kind="trend"] {
+    --line-duration: clamp(480ms, calc(var(--count-duration) - 530ms), 1100ms);
+    --line-end: calc(var(--chart-delay) + var(--line-duration));
+  }
+
+  .chart[data-animate] [data-trend-line] {
+    animation: line-draw var(--line-duration) var(--chart-ease) var(--chart-delay) backwards;
+  }
+
+  .chart[data-animate] [data-trend-area] {
+    animation: fade-in 280ms var(--chart-ease) var(--line-end) backwards;
+  }
+
+  .chart[data-animate] [data-trend-point] {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: marker-appear 280ms var(--chart-ease) var(--line-end) backwards;
+  }
+
+  .chart[data-animate][data-kind="strip"] {
+    --strip-duration: 420ms;
+    animation: strip-reveal var(--strip-duration) var(--chart-ease) var(--chart-delay) backwards;
+  }
+
+  .chart[data-animate][data-kind="strip"] [data-highlighted] {
+    animation: strip-highlight 260ms var(--chart-ease) calc(var(--chart-delay) + var(--strip-duration)) backwards;
+  }
+
+  .chart[data-animate][data-kind="bars"] {
+    --bar-stagger: 55ms;
+    --bar-duration: 480ms;
+  }
+
+  .chart[data-animate] [data-bar] {
+    --bar-delay: calc(var(--chart-delay) + var(--bar-index) * var(--bar-stagger));
+    transform-origin: bottom;
+    animation: bar-rise var(--bar-duration) var(--chart-ease) var(--bar-delay) backwards;
+  }
+
+  .chart[data-animate] [data-bar][data-highlighted] {
+    --bars-end: calc(var(--chart-delay) + var(--last-bar-index) * var(--bar-stagger) + var(--bar-duration));
+    animation:
+      bar-rise var(--bar-duration) var(--chart-ease) var(--bar-delay) backwards,
+      bar-highlight 260ms var(--chart-ease) var(--bars-end) backwards;
+  }
+
+  .chart[data-animate][data-kind="map"] {
+    --land-duration: 320ms;
+  }
+
+  .chart[data-animate] [data-map-land] {
+    animation: fade-in var(--land-duration) var(--chart-ease) var(--chart-delay) backwards;
+  }
+
+  .chart[data-animate] [data-map-pin] {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: marker-appear 240ms var(--chart-ease) calc(var(--chart-delay) + var(--land-duration) + var(--pin-delay)) backwards;
+  }
+}
+
+@keyframes line-draw {
+  from { stroke-dasharray: 1; stroke-dashoffset: 1; }
+  to { stroke-dasharray: 1; stroke-dashoffset: 0; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+}
+
+@keyframes marker-appear {
+  from { opacity: 0; transform: scale(0.5); }
+}
+
+@keyframes strip-reveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0); }
+}
+
+@keyframes strip-highlight {
+  from { opacity: 0.52; }
+}
+
+@keyframes bar-rise {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+@keyframes bar-highlight {
+  from { opacity: 0.6; }
+}

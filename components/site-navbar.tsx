@@ -1,186 +1,208 @@
 "use client";
 
-import { IconMenu2, IconX } from "@tabler/icons-react";
 import Image from "next/image";
-import { useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
-import {
-  MobileNav,
-  MobileNavHeader,
-  MobileNavMenu,
-  NavBody,
-  NavItems,
-  Navbar,
-  NavbarButton,
-} from "@/components/ui/resizable-navbar";
+import { useEffect, useState, type MouseEvent } from "react";
+import CardNav from "@/components/ui/CardNav";
 
-const links = [
-  { name: "Home", link: "#home" },
-  { name: "About", link: "#about" },
-  { name: "Why Us", link: "#why-us" },
-  { name: "Features", link: "#features" },
-  { name: "Channels", link: "#channels" },
-  { name: "Testimonials", link: "#testimonials" },
-  { name: "Contact", link: "#contact" },
+const navigationItems = [
+  {
+    label: "Vanguard AV",
+    links: [{ label: "About", href: "#about" }],
+  },
+  {
+    label: "Product",
+    links: [
+      { label: "Features", href: "#features" },
+      { label: "How it works", href: "#how-it-works" },
+    ],
+  },
+  {
+    label: "Help",
+    links: [{ label: "FAQ", href: "#questions" }],
+  },
 ];
 
-const scrolledSurface =
-  "bg-transparent dark:bg-transparent data-scrolled:bg-surface/80 data-scrolled:ring-1 data-scrolled:ring-outline";
+const logIn = { label: "Log in", disabled: true };
+const signUp = { label: "Sign up", disabled: true };
 
-const activeLinkClassName =
-  "aria-[current=location]:bg-surface-selected aria-[current=location]:text-accent! after:absolute after:inset-y-0 after:end-3.5 after:my-auto after:hidden after:h-0.5 after:w-3.5 after:rounded-full after:bg-current aria-[current=location]:after:block lg:after:inset-x-0 lg:after:top-auto lg:after:bottom-1 lg:after:mx-auto lg:after:my-0";
-
-function subscribeToHash(onChange: () => void) {
-  window.addEventListener("hashchange", onChange);
-  return () => window.removeEventListener("hashchange", onChange);
-}
-
-function getActiveHref() {
-  const hash = window.location.hash;
-  if (hash === "#about-values") return "#about";
-  return links.find(({ link }) => link === hash)?.link ?? "#home";
-}
-
-function getInitialHref() {
-  return "#home";
-}
-
-function AuthActions({ className }: { className: string }) {
+function Wordmark() {
   return (
-    <div role="group" aria-label="Account" className={className}>
-      <NavbarButton
-        as="button"
-        type="button"
-        variant="secondary"
-        disabled
-        className="min-h-11 whitespace-nowrap text-foreground disabled:cursor-not-allowed disabled:translate-y-0 disabled:opacity-55 dark:text-foreground"
-      >
-        Log in
-      </NavbarButton>
-      <NavbarButton
-        as="button"
-        type="button"
-        disabled
-        className="min-h-11 whitespace-nowrap disabled:cursor-not-allowed disabled:translate-y-0 disabled:opacity-55"
-      >
-        Sign up
-      </NavbarButton>
-    </div>
+    <Image
+      src="/vanguard-wordmark.png"
+      alt=""
+      width={118}
+      height={59}
+      loading="eager"
+      className="brightness-125"
+    />
   );
 }
 
-function SiteLogo({ onClick }: { onClick?: () => void }) {
+function NavigationFallback() {
   return (
-    <a href="#home" onClick={onClick} className="relative z-20 shrink-0 rounded-md px-1">
-      <Image
-        src="/vanguard-wordmark.png"
-        alt="Vanguard AV home"
-        width={118}
-        height={59}
-        loading="eager"
-        className="h-auto w-26 brightness-125 lg:w-[7.375rem]"
-      />
-    </a>
+    <noscript>
+      <nav aria-label="Main navigation" className="site-container pointer-events-auto relative py-2">
+        <button type="button" disabled={logIn.disabled} className="absolute end-4 top-2 min-h-11 px-2 text-sm text-muted-foreground">
+          {logIn.label}
+        </button>
+        <details className="site-nav-fallback rounded-lg border border-outline bg-surface px-4">
+          <summary className="site-nav-toggle min-h-11 cursor-pointer content-center rounded-md">
+            Menu
+          </summary>
+          <ul className="grid gap-1 pb-3 text-sm">
+            <li>
+              <a href="#home" className="site-nav-link flex min-h-11 items-center px-2">
+                Home
+              </a>
+            </li>
+            {navigationItems.flatMap(({ links }) => links).map(({ href, label }) => (
+              <li key={href}>
+                <a href={href} className="site-nav-link flex min-h-11 items-center px-2">
+                  {label}
+                </a>
+              </li>
+            ))}
+            <li>
+              <button type="button" disabled className="min-h-11 px-2 text-muted-foreground">
+                {signUp.label}
+              </button>
+            </li>
+          </ul>
+        </details>
+      </nav>
+    </noscript>
   );
 }
 
 export function SiteNavbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const activeHref = useSyncExternalStore(subscribeToHash, getActiveHref, getInitialHref);
-  const menuId = useId();
-  const navigation = useRef<HTMLElement>(null);
-  const toggle = useRef<HTMLButtonElement>(null);
-  const MenuIcon = isOpen ? IconX : IconMenu2;
+  const [activeHref, setActiveHref] = useState<string>();
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    if (!isOpen) return;
+    const root = document.documentElement;
+    let frame: number | undefined;
+    let scrollPadding = readScrollPadding();
 
-    function dismissOnOutsidePress(event: PointerEvent) {
-      if (event.target instanceof Node && !navigation.current?.contains(event.target)) {
-        setIsOpen(false);
-      }
+    function readScrollPadding() {
+      return parseFloat(getComputedStyle(root).scrollPaddingBlockStart) || 0;
     }
 
-    document.addEventListener("pointerdown", dismissOnOutsidePress);
-    return () => document.removeEventListener("pointerdown", dismissOnOutsidePress);
-  }, [isOpen]);
+    function updateCurrentSection() {
+      if (frame !== undefined) return;
+      frame = requestAnimationFrame(() => {
+        frame = undefined;
+        const scrollY = window.scrollY;
+        const viewportHeight = root.clientHeight;
+        setScrolled(scrollY > 0);
 
-  function closeMenu() {
-    setIsOpen(false);
-    toggle.current?.focus();
+        const atBottom = scrollY > 0 && scrollY + viewportHeight >= root.scrollHeight - 1;
+        const hash = window.location.hash;
+        let currentHref: string | undefined;
+        let mostVisible = 0;
+        for (const section of document.querySelectorAll("main > section[id]")) {
+          const link = `#${section.id}`;
+          const { top, bottom } = section.getBoundingClientRect();
+          const visibleHeight = Math.min(bottom, viewportHeight) - Math.max(top, scrollPadding);
+          if (visibleHeight <= 0) continue;
+
+          const alignedDestination = link === hash && Math.abs(top - scrollPadding) <= 1;
+          if (alignedDestination || (atBottom && bottom >= viewportHeight - 1)) {
+            currentHref = link;
+            break;
+          }
+
+          if (visibleHeight > mostVisible) {
+            mostVisible = visibleHeight;
+            currentHref = link;
+          }
+        }
+        setActiveHref(currentHref);
+      });
+    }
+
+    function updateViewport() {
+      scrollPadding = readScrollPadding();
+      updateCurrentSection();
+    }
+
+    const resizeObserver = new ResizeObserver(updateCurrentSection);
+    resizeObserver.observe(document.body);
+    window.addEventListener("scroll", updateCurrentSection, { passive: true });
+    window.addEventListener("hashchange", updateCurrentSection);
+    window.addEventListener("resize", updateViewport);
+    window.addEventListener("pageshow", updateViewport);
+    updateCurrentSection();
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("scroll", updateCurrentSection);
+      window.removeEventListener("hashchange", updateCurrentSection);
+      window.removeEventListener("resize", updateViewport);
+      window.removeEventListener("pageshow", updateViewport);
+      if (frame !== undefined) cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  function onSectionSelect(event: MouseEvent<HTMLElement>) {
+    if (
+      event.defaultPrevented || event.button !== 0 ||
+      event.altKey || event.ctrlKey || event.metaKey || event.shiftKey ||
+      !(event.target instanceof Element)
+    ) return;
+
+    const href = event.target.closest('a[href^="#"]')?.getAttribute("href");
+    if (!href) return;
+
+    const section = document.getElementById(href.slice(1));
+    const headingId = section?.getAttribute("aria-labelledby");
+    const heading = headingId ? document.getElementById(headingId) : null;
+    if (!heading) return;
+
+    // Native fragment navigation runs before moving focus to the heading.
+    requestAnimationFrame(() => heading.focus({ preventScroll: true }));
   }
 
   return (
-    <header className="sticky top-0 z-40 h-0 px-4 sm:px-6 lg:px-8">
-      <nav
-        ref={navigation}
-        aria-label="Main navigation"
-        className="pt-3 lg:pt-4"
-        onBlur={(event) => {
-          if (isOpen && event.relatedTarget && !event.currentTarget.contains(event.relatedTarget)) {
-            setIsOpen(false);
-          }
-        }}
-        onKeyDown={(event) => {
-          if (event.key === "Escape" && isOpen) {
-            event.stopPropagation();
-            closeMenu();
-          }
-        }}
-      >
-        <Navbar className="relative top-0">
-          <NavBody className={`min-w-[min(100%,64rem)]! gap-4 rounded-md px-6 ${scrolledSurface}`}>
-            <SiteLogo />
-            <NavItems
-              items={links}
-              activeHref={activeHref}
-              className="static flex-none gap-0.5 space-x-0 lg:space-x-0"
-              itemClassName={`${activeLinkClassName} flex min-h-11 items-center rounded-md px-2.5 whitespace-nowrap text-foreground/80 hover:text-foreground xl:px-3 dark:text-foreground/80`}
-              highlightClassName="rounded-md bg-surface-hover dark:bg-surface-hover"
-            />
-            <AuthActions className="flex shrink-0 items-center gap-1" />
-          </NavBody>
-
-          <MobileNav className={`max-w-none rounded-md! ${scrolledSurface}`}>
-            <MobileNavHeader>
-              <SiteLogo onClick={isOpen ? closeMenu : undefined} />
-              <button
-                ref={toggle}
-                type="button"
-                aria-label={isOpen ? "Close menu" : "Open menu"}
-                aria-controls={menuId}
-                aria-expanded={isOpen}
-                onClick={() => setIsOpen((open) => !open)}
-                className="grid size-11 cursor-pointer place-items-center rounded-md text-foreground"
-              >
-                <MenuIcon aria-hidden="true" />
-              </button>
-            </MobileNavHeader>
-            <div id={menuId} inert={!isOpen} data-lenis-prevent className="contents">
-              <MobileNavMenu
-                isOpen={isOpen}
-                onClose={closeMenu}
-                className="top-full mt-2 max-h-[calc(100dvh-8rem)] gap-3 overflow-y-auto overscroll-contain rounded-md bg-surface-raised py-4 ring-1 ring-outline dark:bg-surface-raised"
-              >
-                <ul className="grid w-full gap-0.5">
-                  {links.map(({ name, link }) => (
-                    <li key={link}>
-                      <a
-                        href={link}
-                        aria-current={link === activeHref ? "location" : undefined}
-                        onClick={closeMenu}
-                        className={`${activeLinkClassName} relative flex min-h-11 items-center rounded-md px-3 text-sm font-medium text-foreground/80 transition-colors hover:bg-surface-hover hover:text-foreground motion-reduce:transition-none`}
-                      >
-                        {name}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-                <AuthActions className="grid w-full grid-cols-2 gap-3" />
-              </MobileNavMenu>
-            </div>
-          </MobileNav>
-        </Navbar>
-      </nav>
+    <header
+      data-scrolled={scrolled || undefined}
+      className="site-header pointer-events-none sticky top-0 z-40 grid shrink-0 content-center"
+      onClick={onSectionSelect}
+    >
+      <div className="site-container">
+        <CardNav
+          ariaLabel="Main navigation"
+          className="site-card-nav"
+          logo={<Wordmark />}
+          logoHref="#home"
+          logoAlt="Vanguard AV home"
+          items={navigationItems.map((item) => ({
+            ...item,
+            links: item.links.map((link) => ({
+              ...link,
+              current: link.href === activeHref,
+            })),
+          }))}
+          barAction={logIn}
+          cta={signUp}
+          openOn="hover"
+          cardEffect="unfold"
+          bounce={0.21}
+          cardHeight={164}
+          maxWidth={1120}
+          style={{
+            "--cn-panel": "var(--site-card-nav-surface, rgb(17 20 17 / 82%))",
+            "--cn-tile": "var(--color-surface-raised)",
+            "--cn-text": "var(--color-foreground)",
+            "--cn-muted": "var(--color-muted-foreground)",
+            "--cn-hover": "var(--color-surface-hover)",
+            "--cn-ring": "var(--color-accent)",
+            "--cn-current": "var(--color-accent)",
+            "--cn-viewport-inset": "var(--site-header-height)",
+            "--cn-logo": "50px",
+          }}
+        />
+      </div>
+      <NavigationFallback />
     </header>
   );
 }

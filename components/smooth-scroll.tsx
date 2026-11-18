@@ -1,12 +1,17 @@
 "use client";
 
+import { useReducedMotion } from "@/lib/reduced-motion";
 import Lenis from "lenis";
 import { useEffect } from "react";
 
 const scrollKeys = new Set(["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Home", "End", " "]);
 
 export function SmoothScroll() {
+  const shouldReduceMotion = useReducedMotion();
+
   useEffect(() => {
+    if (shouldReduceMotion) return;
+
     const lenis = new Lenis({ autoRaf: true, lerp: 0.075 });
     const controller = new AbortController();
     const options = { signal: controller.signal };
@@ -40,7 +45,7 @@ export function SmoothScroll() {
       controller.abort();
       lenis.destroy();
     };
-  }, []);
+  }, [shouldReduceMotion]);
 
   return null;
 }

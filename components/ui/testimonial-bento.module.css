@@ -1,0 +1,40 @@
+.card {
+  --frame-color: color-mix(in oklab, var(--color-outline) 80%, var(--color-muted-foreground));
+
+  background: radial-gradient(ellipse at 25% 0%, var(--color-surface), transparent 75%);
+}
+
+.card::before,
+.card::after {
+  position: absolute;
+  pointer-events: none;
+  content: "";
+}
+
+.card::before {
+  inset: -0.75rem 0;
+  border-inline: 1px solid var(--frame-color);
+}
+
+.card::after {
+  inset: 0 -0.75rem;
+  border-block: 1px solid var(--frame-color);
+}
+
+@media (min-width: 64rem) {
+  .card::before {
+    inset-block: -0.5rem;
+  }
+
+  .card::after {
+    inset-inline: -0.5rem;
+  }
+
+  .card:nth-child(3n + 2) {
+    translate: 0 0.5rem;
+  }
+
+  .card:nth-child(3n) {
+    translate: 0 1rem;
+  }
+}

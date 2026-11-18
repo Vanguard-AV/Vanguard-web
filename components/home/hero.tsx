@@ -14,7 +14,7 @@ export function Hero() {
     <section
       id="home"
       aria-labelledby="hero-title"
-      className="relative isolate grid min-h-[min(38rem,88svh)] place-items-center overflow-hidden px-5 pt-28 pb-16 text-center selection:bg-accent selection:text-canvas sm:min-h-svh sm:px-8 sm:pt-36 sm:pb-24"
+      className="relative isolate grid min-h-[min(38rem,88svh)] grid-cols-1 place-items-center overflow-hidden pt-28 pb-16 text-center selection:bg-accent selection:text-canvas sm:min-h-svh sm:pt-36 sm:pb-24"
     >
       <GlassBackground />
       <div
@@ -22,9 +22,10 @@ export function Hero() {
         className="pointer-events-none absolute inset-0 bg-canvas/25"
       />
 
-      <div className="relative mx-auto flex w-full max-w-6xl flex-col items-center">
+      <div className="relative flex w-full flex-col items-center">
         <h1
           id="hero-title"
+          tabIndex={-1}
           className="text-[clamp(2.25rem,10.6vw,2.75rem)] leading-[1.08] font-medium tracking-[-0.035em] text-foreground sm:text-[clamp(2.75rem,7.8vw,6rem)]"
         >
           <span className="block text-balance">Guardians of the</span>
@@ -51,7 +52,7 @@ export function Hero() {
               aria-hidden="true"
               size={20}
               stroke={1.5}
-              className="transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transform-none motion-reduce:transition-none"
+              className="motion-safe:transition-transform motion-safe:duration-150 motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
             />
           </span>
         </button>

@@ -9,7 +9,7 @@ import {
 import { AboutStack } from "./about-stack";
 
 const stackPanelClassName =
-  "relative mb-[clamp(2rem,5vw,4rem)] origin-bottom scroll-mt-28 rounded-xl bg-canvas p-[clamp(1.5rem,3vw,3rem)] last:mb-0 motion-safe:sticky motion-safe:top-[var(--stack-top,7rem)] motion-safe:[&:not(:first-child)]:shadow-[0_-1rem_3rem_rgb(0_0_0/35%)]";
+  "relative mb-[clamp(2rem,5vw,4rem)] origin-bottom rounded-xl bg-canvas p-[clamp(1.5rem,3vw,3rem)] last:mb-0 motion-safe:sticky motion-safe:top-[var(--stack-top,7rem)] motion-safe:[&:not(:first-child)]:shadow-[0_-1rem_3rem_rgb(0_0_0/35%)]";
 
 const stackAnimationClassName =
   "motion-safe:supports-[animation-timeline:view()]:animate-stack-depth motion-safe:supports-[animation-timeline:view()]:[animation-range:entry_0%_entry_100%]";
@@ -49,9 +49,9 @@ export function About() {
     <section
       id="about"
       aria-labelledby="about-title"
-      className="bg-canvas px-[clamp(1.25rem,4.45vw,5rem)] text-foreground selection:bg-accent selection:text-canvas"
+      className="bg-canvas text-foreground selection:bg-accent selection:text-canvas"
     >
-      <AboutStack className="isolate mx-auto max-w-7xl [timeline-scope:--stack-manifesto,--stack-values]">
+      <AboutStack className="isolate [timeline-scope:--stack-manifesto,--stack-values]">
         <div
           data-stack-panel
           className={`${stackPanelClassName} ${stackAnimationClassName} z-1 grid min-h-[calc(100svh-9rem)] content-center items-center gap-8 md:grid-cols-2 md:gap-x-[clamp(3rem,4.45vw,4rem)] motion-safe:supports-[animation-timeline:view()]:[animation-timeline:--stack-manifesto] motion-safe:supports-[animation-timeline:view()]:[view-timeline-name:--about-intro]`}
@@ -59,6 +59,7 @@ export function About() {
           <div className="@container min-w-0">
             <h2
               id="about-title"
+              tabIndex={-1}
               aria-label="About Vanguard"
               className="text-[min(19cqi,5.5rem)] leading-none font-medium tracking-[-0.035em]"
             >

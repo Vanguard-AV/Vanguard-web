@@ -51,12 +51,13 @@ export function WhyUs() {
     <section
       id="why-us"
       aria-labelledby="why-us-title"
-      className="bg-canvas px-[clamp(1.25rem,4.45vw,5rem)] py-[clamp(4.5rem,9vw,8rem)] text-foreground selection:bg-accent selection:text-canvas"
+      className="bg-canvas py-[clamp(4.5rem,9vw,8rem)] text-foreground selection:bg-accent selection:text-canvas"
     >
-      <div className="mx-auto max-w-7xl">
+      <div>
         <div className="mb-[clamp(2rem,5vw,4rem)] grid items-end gap-5 md:grid-cols-[3fr_2fr] md:gap-10">
           <h2
             id="why-us-title"
+            tabIndex={-1}
             className="text-[clamp(2.75rem,6vw,5.5rem)] leading-[0.98] font-medium tracking-[-0.02em]"
           >
             Why choose Vanguard?
