@@ -1,6 +1,6 @@
-import { ReactLenis } from "lenis/react";
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
+import { SmoothScroll } from "@/components/smooth-scroll";
 import "lenis/dist/lenis.css";
 import "./globals.css";
 
@@ -15,7 +15,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en">
       <body className={outfit.className}>
-        <ReactLenis root options={{ autoRaf: true, lerp: 0.075, anchors: { duration: 1.1 } }} />
+        <SmoothScroll />
         {children}
       </body>
     </html>
