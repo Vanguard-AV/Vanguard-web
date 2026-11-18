@@ -177,6 +177,10 @@ html {
   margin-block-end: calc(-1 * var(--site-header-height));
 }
 
+.site-mega-nav {
+  background-color: #000;
+}
+
 .site-nav-link {
   color: var(--color-foreground);
 }
@@ -194,6 +198,7 @@ html {
 
 @media (forced-colors: active) {
   .site-header,
+  .site-mega-nav,
   .site-nav-menu {
     background-color: Canvas;
     border-color: CanvasText;
@@ -222,12 +227,14 @@ html {
 }
 
 @media (scripting: none) {
-  .site-header:has(details[open]) {
-    @variant max-navigation {
-      position: static;
-      block-size: auto;
-      margin-block-end: 0;
-    }
+  .site-mega-nav {
+    display: none;
+  }
+
+  .site-header:has(.site-nav-fallback[open]) {
+    position: static;
+    block-size: auto;
+    margin-block-end: 0;
   }
 }
 
