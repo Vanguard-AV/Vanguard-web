@@ -61,7 +61,7 @@ const resources = [
   },
 ];
 
-const contactHref = "https://vanguard-av.net/#contact";
+const contactHref = "#contact";
 const barLinkClass = "site-nav-link flex min-h-11 items-center rounded-lg px-3";
 
 function AccountActions() {
@@ -411,7 +411,13 @@ export function SiteNavbar() {
                   </div>
                 </li>
                 <li className="navigation:flex navigation:items-center">
-                  <a href={contactHref} className={barLinkClass}>
+                  <a
+                    href={contactHref}
+                    aria-current={
+                      activeHref === contactHref ? "location" : undefined
+                    }
+                    className={barLinkClass}
+                  >
                     Contact Us
                   </a>
                 </li>

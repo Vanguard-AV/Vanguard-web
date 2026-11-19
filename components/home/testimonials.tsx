@@ -1,4 +1,4 @@
-import { TestimonialBento } from "@/components/ui/testimonial-bento";
+import ClientFeedback from "@/components/ui/testimonial";
 
 // Quotes, attributions, and ratings as published on https://vanguard-av.net/#testimonials.
 const testimonials = [
@@ -53,5 +53,11 @@ const testimonials = [
 ] as const;
 
 export function Testimonials() {
-  return <TestimonialBento testimonials={testimonials} />;
+  return (
+    <ClientFeedback
+      testimonials={testimonials}
+      title="Testimonials"
+      description="Perspectives on Vanguard from security, engineering, and business leaders."
+    />
+  );
 }

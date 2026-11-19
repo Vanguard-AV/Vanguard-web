@@ -1,4 +1,5 @@
 import { About } from "@/components/home/about";
+import { Contact } from "@/components/home/contact";
 import { FAQ } from "@/components/home/faq";
 import { Features } from "@/components/home/features";
 import { Hero } from "@/components/home/hero";
@@ -28,6 +29,7 @@ export default function Home() {
         <HowItWorks />
         <Testimonials />
         <FAQ />
+        <Contact />
       </main>
       <Footer />
     </div>

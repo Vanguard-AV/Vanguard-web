@@ -47,6 +47,7 @@ export function FAQ() {
       title="Frequently asked questions"
       description="Learn what Vanguard checks, how it looks for threats, and who it’s built for."
       data={questions}
+      supportHref="#contact"
     />
   );
 }

@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import * as React from 'react';
+import * as React from "react";
 
-import { cn } from 'cn';
+import { cn } from "cn";
 
 const range = (length: number) => Array.from({ length }, (_, i) => i);
 
-type HexagonBackgroundProps = React.ComponentProps<'div'> & {
-  hexagonProps?: React.ComponentProps<'div'>;
+type HexagonBackgroundProps = React.ComponentProps<"div"> & {
+  hexagonProps?: React.ComponentProps<"div">;
   hexagonSize?: number;
   hexagonMargin?: number;
 };
@@ -66,13 +66,13 @@ function HexagonBackground({
       ref={containerRef}
       data-slot="hexagon-background"
       className={cn(
-        'relative isolate size-full overflow-hidden dark:bg-neutral-900 bg-neutral-100',
+        "relative isolate size-full overflow-hidden dark:bg-neutral-900 bg-neutral-100",
         className,
       )}
       {...props}
       style={
         {
-          '--hexagon-margin': `${hexagonMargin}px`,
+          "--hexagon-margin": `${hexagonMargin}px`,
           ...props.style,
         } as React.CSSProperties
       }
@@ -104,12 +104,12 @@ function HexagonBackground({
                   ...hexagonProps?.style,
                 }}
                 className={cn(
-                  'relative',
-                  '[clip-path:polygon(50%_0%,_100%_25%,_100%_75%,_50%_100%,_0%_75%,_0%_25%)]',
+                  "relative",
+                  "[clip-path:polygon(50%_0%,_100%_25%,_100%_75%,_50%_100%,_0%_75%,_0%_25%)]",
                   "before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full dark:before:bg-neutral-950 before:bg-white before:opacity-100 before:transition-colors before:duration-1000",
                   "after:content-[''] after:absolute after:inset-[var(--hexagon-margin)] dark:after:bg-neutral-950 after:bg-white",
-                  'after:[clip-path:polygon(50%_0%,_100%_25%,_100%_75%,_50%_100%,_0%_75%,_0%_25%)]',
-                  'hover:before:bg-neutral-200 dark:hover:before:bg-neutral-800 hover:before:opacity-100 hover:before:duration-0 dark:hover:after:bg-neutral-900 hover:after:bg-neutral-100 hover:after:opacity-100 hover:after:duration-0',
+                  "after:[clip-path:polygon(50%_0%,_100%_25%,_100%_75%,_50%_100%,_0%_75%,_0%_25%)]",
+                  "hover:before:bg-neutral-200 dark:hover:before:bg-neutral-800 hover:before:opacity-100 hover:before:duration-0 dark:hover:after:bg-neutral-900 hover:after:bg-neutral-100 hover:after:opacity-100 hover:after:duration-0",
                   hexagonProps?.className,
                 )}
               />

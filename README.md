@@ -24,6 +24,20 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Contact form email delivery
+
+Website submissions are paused. Set `contactFormEnabled` to `true` in `lib/contact-fields.ts` and rebuild to resume submissions.
+
+Set these server-side environment variables in `.env.local` for local development or in the hosting environment for production. Restart the server after changing local values.
+
+| Variable | Value |
+| --- | --- |
+| `RESEND_API_KEY` | Resend API key with permission to send email. |
+| `CONTACT_FROM_EMAIL` | Sender address on a domain verified in Resend. |
+| `CONTACT_TO_EMAIL` | Optional recipient override. Defaults to `info@vanguard-av.net`. |
+
+The form sends plain-text email and sets the visitor’s email as Reply-To. The form preserves the draft and displays an error if email delivery is unavailable. [Resend Email API](https://resend.com/docs/api-reference/emails/send-email)
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
