@@ -6,7 +6,6 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import {
-  AdjustmentsHorizontalIcon,
   ChatBubbleLeftRightIcon,
   CpuChipIcon,
   QuestionMarkCircleIcon,
@@ -28,12 +27,6 @@ const resources = [
     href: "#features",
     description: "Explore the files, links, and messages Vanguard can check.",
     Icon: CpuChipIcon,
-  },
-  {
-    label: "How it works",
-    href: "#how-it-works",
-    description: "Follow a scan from submission to results.",
-    Icon: AdjustmentsHorizontalIcon,
   },
   {
     label: "Why Vanguard",

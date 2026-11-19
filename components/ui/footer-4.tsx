@@ -9,7 +9,6 @@ const linkGroups = [
     title: "Product",
     links: [
       { title: "Features", href: "/#features" },
-      { title: "How it works", href: "/#how-it-works" },
     ],
   },
   {

@@ -3,7 +3,6 @@ import { Contact } from "@/components/home/contact";
 import { FAQ } from "@/components/home/faq";
 import { Features } from "@/components/home/features";
 import { Hero } from "@/components/home/hero";
-import { HowItWorks } from "@/components/home/how-it-works";
 import { Stats } from "@/components/home/stats";
 import { Testimonials } from "@/components/home/testimonials";
 import { WhyUs } from "@/components/home/why-us";
@@ -26,7 +25,6 @@ export default function Home() {
         <WhyUs />
         <Stats />
         <Features />
-        <HowItWorks />
         <Testimonials />
         <FAQ />
         <Contact />
