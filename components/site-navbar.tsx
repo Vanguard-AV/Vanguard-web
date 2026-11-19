@@ -1,6 +1,10 @@
 "use client";
 
-import { Bars3Icon, ChevronDownIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  Bars3Icon,
+  ChevronDownIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import {
   AdjustmentsHorizontalIcon,
   ChatBubbleLeftRightIcon,
@@ -10,7 +14,13 @@ import {
   UserGroupIcon,
 } from "@heroicons/react/24/solid";
 import Image from "next/image";
-import { useEffect, useEffectEvent, useRef, useState, type MouseEvent } from "react";
+import {
+  useEffect,
+  useEffectEvent,
+  useRef,
+  useState,
+  type MouseEvent,
+} from "react";
 
 const resources = [
   {
@@ -57,10 +67,18 @@ const barLinkClass = "site-nav-link flex min-h-11 items-center rounded-lg px-3";
 function AccountActions() {
   return (
     <div className="flex flex-wrap items-center gap-2">
-      <button type="button" disabled className="min-h-11 rounded-lg px-3 text-muted-foreground">
+      <button
+        type="button"
+        disabled
+        className="min-h-11 rounded-lg px-3 text-muted-foreground"
+      >
         Log in
       </button>
-      <button type="button" disabled className="min-h-11 rounded-lg border border-outline bg-surface-hover px-4 text-muted-foreground">
+      <button
+        type="button"
+        disabled
+        className="min-h-11 rounded-lg border border-outline bg-surface-hover px-4 text-muted-foreground"
+      >
         Sign up
       </button>
     </div>
@@ -70,18 +88,29 @@ function AccountActions() {
 function NavigationFallback() {
   return (
     <noscript>
-      <nav aria-label="Main navigation" className="site-container pointer-events-auto relative py-2">
+      <nav
+        aria-label="Main navigation"
+        className="site-container pointer-events-auto relative py-2"
+      >
         <details className="site-nav-fallback rounded-lg border border-outline bg-black px-4">
           <summary className="site-nav-toggle min-h-11 cursor-pointer content-center rounded-md">
             Menu
           </summary>
           <ul className="grid gap-1 pb-3 text-sm">
-            {[{ href: "#home", label: "Home" }, ...resources, { href: contactHref, label: "Contact Us" }].map(({ href, label }) => (
+            {[
+              { href: "#home", label: "Home" },
+              ...resources,
+              { href: contactHref, label: "Contact Us" },
+            ].map(({ href, label }) => (
               <li key={href}>
-                <a href={href} className={barLinkClass}>{label}</a>
+                <a href={href} className={barLinkClass}>
+                  {label}
+                </a>
               </li>
             ))}
-            <li><AccountActions /></li>
+            <li>
+              <AccountActions />
+            </li>
           </ul>
         </details>
       </nav>
@@ -92,14 +121,21 @@ function NavigationFallback() {
 export function SiteNavbar() {
   const [activeHref, setActiveHref] = useState<string>();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [resourcesMode, setResourcesMode] = useState<"hover" | "open" | null>(null);
+  const [resourcesMode, setResourcesMode] = useState<"hover" | "open" | null>(
+    null,
+  );
   const nav = useRef<HTMLElement>(null);
   const resourcesItem = useRef<HTMLLIElement>(null);
   const resourcesToggle = useRef<HTMLButtonElement>(null);
   const mobileToggle = useRef<HTMLButtonElement>(null);
 
   const closeOnEscape = useEffectEvent((event: KeyboardEvent) => {
-    if (event.key !== "Escape" || event.defaultPrevented || (!resourcesMode && !mobileOpen)) return;
+    if (
+      event.key !== "Escape" ||
+      event.defaultPrevented ||
+      (!resourcesMode && !mobileOpen)
+    )
+      return;
     event.preventDefault();
 
     if (resourcesMode) {
@@ -114,7 +150,9 @@ export function SiteNavbar() {
   });
 
   useEffect(() => {
-    const breakpoint = getComputedStyle(document.documentElement).getPropertyValue("--breakpoint-navigation").trim();
+    const breakpoint = getComputedStyle(document.documentElement)
+      .getPropertyValue("--breakpoint-navigation")
+      .trim();
     const desktop = window.matchMedia(`(min-width: ${breakpoint})`);
     const controller = new AbortController();
     const options = { signal: controller.signal };
@@ -125,10 +163,22 @@ export function SiteNavbar() {
     }
 
     desktop.addEventListener("change", closeMenus, options);
-    document.addEventListener("pointerdown", (event) => {
-      if (event.target instanceof Node && !nav.current?.contains(event.target)) closeMenus();
-    }, options);
-    document.addEventListener("keydown", (event) => closeOnEscape(event), options);
+    document.addEventListener(
+      "pointerdown",
+      (event) => {
+        if (
+          event.target instanceof Node &&
+          !nav.current?.contains(event.target)
+        )
+          closeMenus();
+      },
+      options,
+    );
+    document.addEventListener(
+      "keydown",
+      (event) => closeOnEscape(event),
+      options,
+    );
 
     return () => controller.abort();
   }, []);
@@ -148,18 +198,24 @@ export function SiteNavbar() {
         frame = undefined;
         const scrollY = window.scrollY;
         const viewportHeight = root.clientHeight;
-        const atBottom = scrollY > 0 && scrollY + viewportHeight >= root.scrollHeight - 1;
+        const atBottom =
+          scrollY > 0 && scrollY + viewportHeight >= root.scrollHeight - 1;
         const hash = window.location.hash;
         let currentHref: string | undefined;
         let mostVisible = 0;
         for (const section of document.querySelectorAll("main > section[id]")) {
           const link = `#${section.id}`;
           const { top, bottom } = section.getBoundingClientRect();
-          const visibleHeight = Math.min(bottom, viewportHeight) - Math.max(top, scrollPadding);
+          const visibleHeight =
+            Math.min(bottom, viewportHeight) - Math.max(top, scrollPadding);
           if (visibleHeight <= 0) continue;
 
-          const alignedDestination = link === hash && Math.abs(top - scrollPadding) <= 1;
-          if (alignedDestination || (atBottom && bottom >= viewportHeight - 1)) {
+          const alignedDestination =
+            link === hash && Math.abs(top - scrollPadding) <= 1;
+          if (
+            alignedDestination ||
+            (atBottom && bottom >= viewportHeight - 1)
+          ) {
             currentHref = link;
             break;
           }
@@ -198,10 +254,15 @@ export function SiteNavbar() {
 
   function onLinkSelect(event: MouseEvent<HTMLElement>) {
     if (
-      event.defaultPrevented || event.button !== 0 ||
-      event.altKey || event.ctrlKey || event.metaKey || event.shiftKey ||
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.altKey ||
+      event.ctrlKey ||
+      event.metaKey ||
+      event.shiftKey ||
       !(event.target instanceof Element)
-    ) return;
+    )
+      return;
 
     const href = event.target.closest("a[href]")?.getAttribute("href");
     if (!href) return;
@@ -228,7 +289,7 @@ export function SiteNavbar() {
           onClick={onLinkSelect}
           onPointerLeave={() => {
             if (!resourcesItem.current?.contains(document.activeElement)) {
-              setResourcesMode((mode) => mode === "hover" ? null : mode);
+              setResourcesMode((mode) => (mode === "hover" ? null : mode));
             }
           }}
           onBlur={(event) => {
@@ -238,7 +299,11 @@ export function SiteNavbar() {
             }
           }}
         >
-          <a href="#home" aria-label="Vanguard AV home" className="site-logo ms-2 flex w-fit items-center rounded-lg">
+          <a
+            href="#home"
+            aria-label="Vanguard AV home"
+            className="site-logo ms-2 flex w-fit items-center rounded-lg"
+          >
             <Image
               src="/vanguard-wordmark.png"
               alt=""
@@ -259,7 +324,11 @@ export function SiteNavbar() {
               setResourcesMode(null);
             }}
           >
-            {mobileOpen ? <XMarkIcon aria-hidden="true" className="size-5" /> : <Bars3Icon aria-hidden="true" className="size-5" />}
+            {mobileOpen ? (
+              <XMarkIcon aria-hidden="true" className="size-5" />
+            ) : (
+              <Bars3Icon aria-hidden="true" className="size-5" />
+            )}
             Menu
           </button>
           <div
@@ -270,7 +339,13 @@ export function SiteNavbar() {
             <div className="site-nav-menu max-navigation:max-h-[calc(100dvh-var(--site-header-height))] max-navigation:overflow-y-auto max-navigation:overscroll-contain max-navigation:rounded-2xl max-navigation:border max-navigation:border-outline max-navigation:bg-black max-navigation:p-2 navigation:contents">
               <ul className="grid gap-1 navigation:flex navigation:items-stretch">
                 <li className="navigation:flex navigation:items-center">
-                  <a href="#home" aria-current={activeHref === "#home" ? "location" : undefined} className={barLinkClass}>
+                  <a
+                    href="#home"
+                    aria-current={
+                      activeHref === "#home" ? "location" : undefined
+                    }
+                    className={barLinkClass}
+                  >
                     Home
                   </a>
                 </li>
@@ -283,7 +358,8 @@ export function SiteNavbar() {
                     }
                   }}
                   onBlur={(event) => {
-                    if (!event.currentTarget.contains(event.relatedTarget)) setResourcesMode(null);
+                    if (!event.currentTarget.contains(event.relatedTarget))
+                      setResourcesMode(null);
                   }}
                 >
                   <button
@@ -292,10 +368,15 @@ export function SiteNavbar() {
                     aria-expanded={resourcesMode !== null}
                     aria-controls="site-navigation-resources"
                     className="site-nav-toggle flex min-h-11 w-full cursor-pointer items-center justify-between gap-2 rounded-lg px-3 aria-expanded:bg-surface-hover"
-                    onClick={() => setResourcesMode(resourcesMode === "open" ? null : "open")}
+                    onClick={() =>
+                      setResourcesMode(resourcesMode === "open" ? null : "open")
+                    }
                   >
                     Resources
-                    <ChevronDownIcon aria-hidden="true" className={`size-3.5 motion-safe:transition-transform ${resourcesMode ? "rotate-180" : ""}`} />
+                    <ChevronDownIcon
+                      aria-hidden="true"
+                      className={`size-3.5 motion-safe:transition-transform ${resourcesMode ? "rotate-180" : ""}`}
+                    />
                   </button>
                   <div
                     id="site-navigation-resources"
@@ -305,13 +386,23 @@ export function SiteNavbar() {
                     <ul className="site-nav-menu grid gap-1 rounded-xl bg-black p-1.5 navigation:max-h-[calc(100dvh-var(--site-header-height))] navigation:grid-cols-3 navigation:overflow-y-auto navigation:overscroll-contain navigation:rounded-2xl navigation:border navigation:border-outline navigation:p-3">
                       {resources.map(({ href, label, description, Icon }) => (
                         <li key={href}>
-                          <a href={href} aria-current={href === activeHref ? "location" : undefined} className="site-nav-link flex h-full min-h-11 items-start gap-3 rounded-lg p-2.5 aria-current:bg-surface-selected">
+                          <a
+                            href={href}
+                            aria-current={
+                              href === activeHref ? "location" : undefined
+                            }
+                            className="site-nav-link flex h-full min-h-11 items-start gap-3 rounded-lg p-2.5 aria-current:bg-surface-selected"
+                          >
                             <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-surface-selected text-accent">
                               <Icon aria-hidden="true" className="size-5" />
                             </span>
                             <span>
-                              <span className="block font-semibold">{label}</span>
-                              <span className="mt-0.5 block text-muted-foreground">{description}</span>
+                              <span className="block font-semibold">
+                                {label}
+                              </span>
+                              <span className="mt-0.5 block text-muted-foreground">
+                                {description}
+                              </span>
                             </span>
                           </a>
                         </li>
@@ -320,7 +411,9 @@ export function SiteNavbar() {
                   </div>
                 </li>
                 <li className="navigation:flex navigation:items-center">
-                  <a href={contactHref} className={barLinkClass}>Contact Us</a>
+                  <a href={contactHref} className={barLinkClass}>
+                    Contact Us
+                  </a>
                 </li>
               </ul>
               <div className="mt-2 border-t border-outline px-1 pt-2 navigation:mt-0 navigation:justify-self-end navigation:self-center navigation:border-0 navigation:p-0">
