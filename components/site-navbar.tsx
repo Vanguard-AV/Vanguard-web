@@ -13,6 +13,8 @@ import {
   UserGroupIcon,
 } from "@heroicons/react/24/solid";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   useEffect,
   useEffectEvent,
@@ -57,6 +59,10 @@ const resources = [
 const contactHref = "#contact";
 const barLinkClass = "site-nav-link flex min-h-11 items-center rounded-lg px-3";
 
+function resolveSectionHref(hashHref: string, isHomePage: boolean): string {
+  return isHomePage ? hashHref : `/${hashHref}`;
+}
+
 function AccountActions() {
   return (
     <div className="flex flex-wrap items-center gap-2">
@@ -78,7 +84,7 @@ function AccountActions() {
   );
 }
 
-function NavigationFallback() {
+function NavigationFallback({ isHomePage }: { isHomePage: boolean }) {
   return (
     <noscript>
       <nav
@@ -91,9 +97,16 @@ function NavigationFallback() {
           </summary>
           <ul className="grid gap-1 pb-3 text-sm">
             {[
-              { href: "#home", label: "Home" },
-              ...resources,
-              { href: contactHref, label: "Contact Us" },
+              { href: resolveSectionHref("#home", isHomePage), label: "Home" },
+              { href: "/features", label: "Features" },
+              ...resources.map((item) => ({
+                href: resolveSectionHref(item.href, isHomePage),
+                label: item.label,
+              })),
+              {
+                href: resolveSectionHref(contactHref, isHomePage),
+                label: "Contact Us",
+              },
             ].map(({ href, label }) => (
               <li key={href}>
                 <a href={href} className={barLinkClass}>
@@ -112,6 +125,11 @@ function NavigationFallback() {
 }
 
 export function SiteNavbar() {
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
+  const isFeaturesRoute =
+    pathname === "/features" || pathname.startsWith("/features/");
+
   const [activeHref, setActiveHref] = useState<string>();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [resourcesMode, setResourcesMode] = useState<"hover" | "open" | null>(
@@ -177,6 +195,8 @@ export function SiteNavbar() {
   }, []);
 
   useEffect(() => {
+    if (!isHomePage) return;
+
     const root = document.documentElement;
     let frame: number | undefined;
     let scrollPadding = readScrollPadding();
@@ -243,7 +263,7 @@ export function SiteNavbar() {
       window.removeEventListener("pageshow", updateViewport);
       if (frame !== undefined) cancelAnimationFrame(frame);
     };
-  }, []);
+  }, [isHomePage]);
 
   function onLinkSelect(event: MouseEvent<HTMLElement>) {
     if (
@@ -272,6 +292,9 @@ export function SiteNavbar() {
     requestAnimationFrame(() => heading.focus({ preventScroll: true }));
   }
 
+  const homeHref = resolveSectionHref("#home", isHomePage);
+  const resolvedContactHref = resolveSectionHref(contactHref, isHomePage);
+
   return (
     <header className="site-header pointer-events-none sticky top-0 z-40 grid shrink-0 content-center">
       <div className="site-container">
@@ -293,7 +316,7 @@ export function SiteNavbar() {
           }}
         >
           <a
-            href="#home"
+            href={homeHref}
             aria-label="Vanguard AV home"
             className="site-logo ms-2 flex w-fit items-center rounded-lg"
           >
@@ -333,14 +356,25 @@ export function SiteNavbar() {
               <ul className="grid gap-1 navigation:flex navigation:items-stretch">
                 <li className="navigation:flex navigation:items-center">
                   <a
-                    href="#home"
+                    href={homeHref}
                     aria-current={
-                      activeHref === "#home" ? "location" : undefined
+                      isHomePage && activeHref === "#home"
+                        ? "location"
+                        : undefined
                     }
                     className={barLinkClass}
                   >
                     Home
                   </a>
+                </li>
+                <li className="navigation:flex navigation:items-center">
+                  <Link
+                    href="/features"
+                    aria-current={isFeaturesRoute ? "page" : undefined}
+                    className={barLinkClass}
+                  >
+                    Features
+                  </Link>
                 </li>
                 <li
                   ref={resourcesItem}
@@ -377,37 +411,47 @@ export function SiteNavbar() {
                     className="pt-1 navigation:absolute navigation:inset-x-0 navigation:top-full navigation:pt-2"
                   >
                     <ul className="site-nav-menu grid gap-1 rounded-xl bg-black p-1.5 navigation:max-h-[calc(100dvh-var(--site-header-height))] navigation:grid-cols-3 navigation:overflow-y-auto navigation:overscroll-contain navigation:rounded-2xl navigation:border navigation:border-outline navigation:p-3">
-                      {resources.map(({ href, label, description, Icon }) => (
-                        <li key={href}>
-                          <a
-                            href={href}
-                            aria-current={
-                              href === activeHref ? "location" : undefined
-                            }
-                            className="site-nav-link flex h-full min-h-11 items-start gap-3 rounded-lg p-2.5 aria-current:bg-surface-selected"
-                          >
-                            <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-surface-selected text-accent">
-                              <Icon aria-hidden="true" className="size-5" />
-                            </span>
-                            <span>
-                              <span className="block font-semibold">
-                                {label}
+                      {resources.map(({ href, label, description, Icon }) => {
+                        const resolvedHref = resolveSectionHref(
+                          href,
+                          isHomePage,
+                        );
+                        return (
+                          <li key={href}>
+                            <a
+                              href={resolvedHref}
+                              aria-current={
+                                isHomePage && href === activeHref
+                                  ? "location"
+                                  : undefined
+                              }
+                              className="site-nav-link flex h-full min-h-11 items-start gap-3 rounded-lg p-2.5 aria-current:bg-surface-selected"
+                            >
+                              <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-surface-selected text-accent">
+                                <Icon aria-hidden="true" className="size-5" />
                               </span>
-                              <span className="mt-0.5 block text-muted-foreground">
-                                {description}
+                              <span>
+                                <span className="block font-semibold">
+                                  {label}
+                                </span>
+                                <span className="mt-0.5 block text-muted-foreground">
+                                  {description}
+                                </span>
                               </span>
-                            </span>
-                          </a>
-                        </li>
-                      ))}
+                            </a>
+                          </li>
+                        );
+                      })}
                     </ul>
                   </div>
                 </li>
                 <li className="navigation:flex navigation:items-center">
                   <a
-                    href={contactHref}
+                    href={resolvedContactHref}
                     aria-current={
-                      activeHref === contactHref ? "location" : undefined
+                      isHomePage && activeHref === contactHref
+                        ? "location"
+                        : undefined
                     }
                     className={barLinkClass}
                   >
@@ -422,7 +466,7 @@ export function SiteNavbar() {
           </div>
         </nav>
       </div>
-      <NavigationFallback />
+      <NavigationFallback isHomePage={isHomePage} />
     </header>
   );
 }
