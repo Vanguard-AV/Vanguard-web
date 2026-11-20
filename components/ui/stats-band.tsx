@@ -229,11 +229,11 @@ export function StatsBand({
       id={id}
       aria-labelledby={titleId}
       className={cn(
-        "bg-surface py-[clamp(3rem,6vw,6rem)] text-foreground selection:bg-accent selection:text-canvas",
+        "mx-[calc(50%-50vw)] bg-surface py-[clamp(3rem,6vw,6rem)] text-foreground selection:bg-accent selection:text-canvas",
         className,
       )}
     >
-      <div>
+      <div className="site-container">
         <header className="flex flex-col items-start gap-4 md:flex-row md:items-end md:justify-between md:gap-10">
           <h2
             id={titleId}
