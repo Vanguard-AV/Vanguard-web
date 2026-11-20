@@ -1,34 +1,14 @@
 "use client";
 
-import {
-  AlertTriangle,
-  ArrowRight,
-  Binary,
-  CheckCircle2,
-  FileSpreadsheet,
-  FileText,
-  Globe,
-  Mail,
-  MessageSquareWarning,
-  RefreshCw,
-} from "lucide-react";
-import Link from "next/link";
+import { ArrowUpRight, Check, RefreshCw } from "lucide-react";
 import { useState } from "react";
+import {
+  Feature,
+  type FeatureAdvantageItem,
+} from "@/components/ui/feature-with-advantages";
 import { FEATURE_CATALOG } from "@/lib/features/catalog";
-import type {
-  FeatureSlug,
-  ServiceReadinessSnapshot,
-} from "@/lib/features/types";
+import type { ServiceReadinessSnapshot } from "@/lib/features/types";
 import { ReadinessBadge } from "./readiness-badge";
-
-const FEATURE_ICONS: Record<FeatureSlug, typeof Mail> = {
-  url: Globe,
-  email: Mail,
-  sms: MessageSquareWarning,
-  office: FileSpreadsheet,
-  pdf: FileText,
-  exe: Binary,
-};
 
 interface FeatureHubDirectoryProps {
   initialSnapshot: ServiceReadinessSnapshot;
@@ -58,152 +38,151 @@ export function FeatureHubDirectory({
     }
   }
 
-  return (
-    <div className="space-y-4">
-      <div
-        aria-live="polite"
-        className="flex flex-wrap items-center justify-between gap-3 text-sm"
-      >
-        <div className="flex flex-wrap items-center gap-2">
-          {snapshot.overallStatus === "healthy" ? (
-            <CheckCircle2
-              aria-hidden="true"
-              className="size-4 shrink-0 text-positive"
-              strokeWidth={1.75}
-            />
-          ) : (
-            <AlertTriangle
-              aria-hidden="true"
-              className="size-4 shrink-0 text-caution"
-              strokeWidth={1.75}
-            />
-          )}
-          <span className="font-semibold text-foreground tabular-nums">
-            {snapshot.readyCount} of {snapshot.totalCount} scanners ready
-          </span>
-          {snapshot.overallStatus !== "healthy" && (
-            <span className="text-muted-foreground">
-              {snapshot.overallStatus === "degraded"
-                ? "— Healthy scanners remain active while offline services recover."
-                : snapshot.overallStatus === "unconfigured"
-                  ? "— Scanning backend is not configured in this environment."
-                  : "— Scanning services are currently unreachable."}
-            </span>
-          )}
-        </div>
+  const items: FeatureAdvantageItem[] = FEATURE_CATALOG.map((feature) => {
+    const readiness = snapshot.features[feature.slug];
 
-        <button
-          type="button"
-          onClick={refreshHealth}
-          disabled={refreshing}
-          className="inline-flex min-h-11 cursor-pointer items-center gap-1.5 rounded-lg border border-outline bg-surface px-3 text-xs font-semibold text-muted-foreground motion-safe:transition-colors motion-safe:duration-150 hover:border-border-control hover:bg-surface-hover hover:text-foreground disabled:cursor-default disabled:opacity-60"
-        >
-          <RefreshCw
+    return {
+      id: feature.slug,
+      href: feature.route,
+      icon: (
+        <Check
+          aria-hidden="true"
+          className="mt-1.5 size-4 shrink-0 text-accent"
+          strokeWidth={2}
+        />
+      ),
+      title: (
+        <span className="inline-flex items-center gap-1">
+          <span>{feature.name}</span>
+          <ArrowUpRight
             aria-hidden="true"
-            className={`size-3.5 ${refreshing ? "motion-safe:animate-spin" : ""}`}
+            className="size-3.5 shrink-0 text-muted-foreground motion-safe:transition-transform motion-safe:duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent"
             strokeWidth={1.75}
           />
-          <span>{refreshing ? "Checking..." : "Refresh status"}</span>
-        </button>
+        </span>
+      ),
+      description: feature.summary,
+      footer: (
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
+          <ReadinessBadge
+            status={
+              refreshing
+                ? "checking"
+                : readiness.ready
+                  ? "ready"
+                  : "unavailable"
+            }
+            latencyMs={readiness.latencyMs}
+          />
+          <span aria-hidden="true" className="text-outline">
+            ·
+          </span>
+          <span className="tabular-nums">{feature.limitLabel}</span>
+        </div>
+      ),
+    };
+  });
+
+  const statusHeader = (
+    <div
+      aria-live="polite"
+      className="flex w-full flex-wrap items-center justify-between gap-3 border-b border-outline pb-3 text-xs"
+    >
+      <div className="flex flex-wrap items-center gap-2">
+        <span
+          aria-hidden="true"
+          className={
+            snapshot.overallStatus === "healthy"
+              ? "size-1.5 shrink-0 rounded-full bg-positive"
+              : "size-1.5 shrink-0 rotate-45 bg-caution"
+          }
+        />
+        <span className="font-medium text-foreground/90 tabular-nums">
+          {snapshot.readyCount} of {snapshot.totalCount} scanners ready
+        </span>
+        {snapshot.overallStatus !== "healthy" && (
+          <span className="text-muted-foreground">
+            {snapshot.overallStatus === "degraded"
+              ? "— Offline services recovering"
+              : snapshot.overallStatus === "unconfigured"
+                ? "— Backend not configured"
+                : "— Services unreachable"}
+          </span>
+        )}
       </div>
 
-      <div className="workspace-panel overflow-hidden rounded-xl border border-outline bg-surface">
-        <ul className="divide-y divide-outline">
-          {FEATURE_CATALOG.map((feature) => {
-            const Icon = FEATURE_ICONS[feature.slug];
-            const readiness = snapshot.features[feature.slug];
-
-            return (
-              <li key={feature.slug}>
-                <Link
-                  href={feature.route}
-                  className="group grid grid-cols-1 gap-3 px-4 py-4 motion-safe:transition-colors motion-safe:duration-150 hover:bg-surface-hover focus-visible:bg-surface-hover sm:px-5 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)_auto] lg:items-center lg:gap-6"
-                >
-                  <div className="flex min-w-0 items-start gap-3">
-                    <Icon
-                      aria-hidden="true"
-                      className="mt-0.5 size-5 shrink-0 text-accent"
-                      strokeWidth={1.75}
-                    />
-                    <div className="min-w-0 space-y-1">
-                      <span className="block text-base font-semibold text-foreground group-hover:text-accent">
-                        {feature.name}
-                      </span>
-                      <span className="block max-w-[62ch] text-sm leading-5 text-muted-foreground">
-                        {feature.summary}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-wrap items-center gap-x-2 gap-y-1 ps-8 text-xs text-muted-foreground lg:flex-col lg:items-start lg:ps-0">
-                    <span className="font-mono text-foreground/90 break-words">
-                      {feature.formatLabel}
-                    </span>
-                    <span className="tabular-nums">{feature.limitLabel}</span>
-                  </div>
-
-                  <div className="flex flex-wrap items-center justify-between gap-3 ps-8 lg:justify-end lg:ps-0">
-                    <ReadinessBadge
-                      status={
-                        refreshing
-                          ? "checking"
-                          : readiness.ready
-                            ? "ready"
-                            : "unavailable"
-                      }
-                      latencyMs={readiness.latencyMs}
-                    />
-                    <span className="inline-flex min-h-11 items-center gap-1 text-sm font-semibold text-accent">
-                      <span>Open</span>
-                      <ArrowRight
-                        aria-hidden="true"
-                        className="size-4 motion-safe:transition-transform motion-safe:duration-150 group-hover:translate-x-0.5"
-                        strokeWidth={1.75}
-                      />
-                    </span>
-                  </div>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+      <button
+        type="button"
+        onClick={refreshHealth}
+        disabled={refreshing}
+        className="inline-flex min-h-9 cursor-pointer items-center gap-1.5 rounded-md px-2 text-xs font-medium text-muted-foreground motion-safe:transition-colors motion-safe:duration-150 hover:bg-surface-hover hover:text-foreground disabled:cursor-default disabled:opacity-60"
+      >
+        <RefreshCw
+          aria-hidden="true"
+          className={`size-3 ${refreshing ? "motion-safe:animate-spin" : ""}`}
+          strokeWidth={1.75}
+        />
+        <span>{refreshing ? "Checking" : "Refresh"}</span>
+      </button>
     </div>
+  );
+
+  return (
+    <Feature
+      badge={null}
+      title={null}
+      description={null}
+      headerExtra={statusHeader}
+      items={items}
+      className="py-0 lg:py-0"
+      containerClassName="max-w-none"
+      gridClassName="gap-x-10 gap-y-8"
+    />
   );
 }
 
 export function FeatureHubSkeleton() {
-  return (
-    <div
-      className="space-y-4"
-      aria-busy="true"
-      aria-label="Loading scanner readiness"
-    >
-      <div className="flex min-h-11 items-center justify-between text-sm text-muted-foreground">
-        <span>Checking live scanner readiness...</span>
-        <ReadinessBadge status="checking" />
-      </div>
+  const skeletonItems: FeatureAdvantageItem[] = FEATURE_CATALOG.map(
+    (feature) => ({
+      id: feature.slug,
+      href: feature.route,
+      icon: (
+        <Check
+          aria-hidden="true"
+          className="mt-1.5 size-4 shrink-0 text-accent"
+          strokeWidth={2}
+        />
+      ),
+      title: feature.name,
+      description: feature.summary,
+      footer: (
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
+          <ReadinessBadge status="checking" />
+          <span aria-hidden="true" className="text-outline">
+            ·
+          </span>
+          <span className="tabular-nums">{feature.limitLabel}</span>
+        </div>
+      ),
+    }),
+  );
 
-      <div className="overflow-hidden rounded-xl border border-outline bg-surface">
-        <ul className="divide-y divide-outline">
-          {FEATURE_CATALOG.map((feature) => (
-            <li
-              key={feature.slug}
-              className="flex flex-wrap items-center justify-between gap-4 px-5 py-4"
-            >
-              <div className="space-y-1">
-                <p className="text-base font-semibold text-foreground">
-                  {feature.name}
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  {feature.summary}
-                </p>
-              </div>
-              <ReadinessBadge status="checking" />
-            </li>
-          ))}
-        </ul>
-      </div>
+  return (
+    <div aria-busy="true" aria-label="Loading scanner readiness">
+      <Feature
+        badge={null}
+        title={null}
+        description={null}
+        headerExtra={
+          <div className="flex w-full items-center justify-between border-b border-outline pb-3 text-xs text-muted-foreground">
+            <ReadinessBadge status="checking" />
+          </div>
+        }
+        items={skeletonItems}
+        className="py-0 lg:py-0"
+        containerClassName="max-w-none"
+        gridClassName="gap-x-10 gap-y-8"
+      />
     </div>
   );
 }

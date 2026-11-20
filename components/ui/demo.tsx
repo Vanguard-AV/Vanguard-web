@@ -1,5 +1,12 @@
-import Footer from "@/components/ui/footer-4";
+import { Feature } from "@/components/ui/feature-with-advantages";
 
-export default function FooterDemo() {
-  return <Footer />;
+function FeatureDemo() {
+  return (
+    <div className="block">
+      <Feature />
+    </div>
+  );
 }
+
+export { FeatureDemo };
+export default FeatureDemo;

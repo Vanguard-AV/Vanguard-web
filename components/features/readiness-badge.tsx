@@ -1,5 +1,3 @@
-import { CheckCircle2, Clock, XCircle } from "lucide-react";
-
 interface ReadinessBadgeProps {
   status: "ready" | "unavailable" | "checking";
   latencyMs?: number | null;
@@ -13,25 +11,27 @@ export function ReadinessBadge({
 }: ReadinessBadgeProps) {
   if (status === "checking") {
     return (
-      <span className="workspace-badge inline-flex items-center gap-1.5 rounded-full border border-info/30 bg-info-bg px-2.5 py-1 text-xs font-medium text-info">
-        <Clock aria-hidden="true" className="size-3.5 shrink-0" strokeWidth={1.75} />
-        <span>Checking status</span>
+      <span className="workspace-badge inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+        <span
+          aria-hidden="true"
+          className="size-1.5 shrink-0 rounded-full border border-info bg-info/40 motion-safe:animate-pulse"
+        />
+        <span>Checking</span>
       </span>
     );
   }
 
   if (status === "ready") {
     return (
-      <span className="workspace-badge inline-flex items-center gap-1.5 rounded-full border border-positive/30 bg-positive-bg px-2.5 py-1 text-xs font-medium text-positive">
-        <CheckCircle2
+      <span className="workspace-badge inline-flex items-center gap-1.5 text-xs font-medium text-foreground/90">
+        <span
           aria-hidden="true"
-          className="size-3.5 shrink-0"
-          strokeWidth={1.75}
+          className="size-1.5 shrink-0 rounded-full bg-positive"
         />
         <span>Ready</span>
         {!compact && typeof latencyMs === "number" && (
-          <span className="font-mono text-xs text-positive/85 tabular-nums">
-            {Math.round(latencyMs)} ms
+          <span className="font-mono text-[11px] text-muted-foreground tabular-nums">
+            {Math.round(latencyMs)}ms
           </span>
         )}
       </span>
@@ -39,11 +39,10 @@ export function ReadinessBadge({
   }
 
   return (
-    <span className="workspace-badge inline-flex items-center gap-1.5 rounded-full border border-caution/30 bg-caution-bg px-2.5 py-1 text-xs font-medium text-caution">
-      <XCircle
+    <span className="workspace-badge inline-flex items-center gap-1.5 text-xs font-medium text-caution">
+      <span
         aria-hidden="true"
-        className="size-3.5 shrink-0"
-        strokeWidth={1.75}
+        className="size-1.5 shrink-0 rotate-45 bg-caution"
       />
       <span>Unavailable</span>
     </span>

@@ -53,14 +53,14 @@ export function FeatureReadinessClient({
         type="button"
         onClick={recheck}
         disabled={checking}
-        className="inline-flex min-h-11 cursor-pointer items-center gap-1.5 rounded-lg border border-outline bg-surface px-3 text-xs font-semibold text-muted-foreground motion-safe:transition-colors motion-safe:duration-150 hover:border-border-control hover:bg-surface-hover hover:text-foreground disabled:cursor-default disabled:opacity-60"
+        className="inline-flex min-h-9 cursor-pointer items-center gap-1 rounded-md px-2 text-xs font-medium text-muted-foreground motion-safe:transition-colors motion-safe:duration-150 hover:bg-surface-hover hover:text-foreground disabled:cursor-default disabled:opacity-60"
       >
         <RefreshCw
           aria-hidden="true"
-          className={`size-3.5 ${checking ? "motion-safe:animate-spin" : ""}`}
+          className={`size-3 ${checking ? "motion-safe:animate-spin" : ""}`}
           strokeWidth={1.75}
         />
-        <span>{checking ? "Checking..." : "Check status"}</span>
+        <span>{checking ? "Checking" : "Refresh"}</span>
       </button>
     </div>
   );

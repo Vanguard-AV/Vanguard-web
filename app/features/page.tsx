@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function FeaturesHubPage() {
   return (
-    <div className="w-full space-y-6">
+    <div className="w-full space-y-8">
       <header className="space-y-1.5">
         <h1 className="text-[1.75rem] leading-[2.125rem] font-bold tracking-[-0.02em] text-foreground sm:text-[2rem] sm:leading-[2.5rem]">
           Security Scanners
